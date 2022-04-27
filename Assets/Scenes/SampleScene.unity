@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -981,9 +981,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89b96edd49e96d94893b0cad2aafea8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  drawMode: 1
   mapWidth: 100
   mapHeight: 100
-  noiseScale: 0.3
+  scale: 27
+  autoUpdate: 1
+  octaves: 7
+  persistance: 0.43
+  lacunarity: 1.94
+  seed: 4
+  offset: {x: 0.48, y: 0}
+  regions:
+  - name: Water
+    height: 0.4
+    colour: {r: 0.15699539, g: 0.56632894, b: 0.6792453, a: 0}
+  - name: Sand
+    height: 0.45
+    colour: {r: 0.74279606, g: 0.745283, b: 0.3972499, a: 0}
+  - name: Land
+    height: 0.6
+    colour: {r: 0.31761327, g: 0.6226415, b: 0.2731399, a: 0}
+  - name: Land
+    height: 0.7
+    colour: {r: 0.15490389, g: 0.5566038, b: 0.20743388, a: 0}
+  - name: Rock
+    height: 0.8
+    colour: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 0}
+  - name: Darker Rock
+    height: 0.95
+    colour: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 0}
+  - name: Snow
+    height: 1
+    colour: {r: 0.9150943, g: 0.9150943, b: 0.9150943, a: 0}
 --- !u!4 &2058134985
 Transform:
   m_ObjectHideFlags: 0
