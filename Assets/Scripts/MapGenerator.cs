@@ -5,7 +5,7 @@ using UnityEngine;
 public class MapGenerator : MonoBehaviour
 {
 
-    public enum DrawMode {NoiseMap, ColourMap};
+    public enum DrawMode {NoiseMap, ColourMap, Mesh, FalloffMap};
     public DrawMode drawMode;
 
     public int mapWidth;
@@ -21,7 +21,21 @@ public class MapGenerator : MonoBehaviour
     public int seed;
     public Vector2 offset;
 
+    public bool useFalloff;
+
+    public float meshHeightMultiplier;
+    public AnimationCurve meshHeightCurve;
+
     public TerrainType[] regions;
+
+    float[,] falloffMap;
+
+    void Awake()
+    {
+        falloffMap = FalloffGenerator.GenerateFalloffMap (mapWidth, mapHeight);
+
+        GenerateMap();
+    }
 
     public void GenerateMap() 
     {
@@ -33,6 +47,12 @@ public class MapGenerator : MonoBehaviour
         {
             for(int x = 0; x < mapWidth; x++)
             {
+
+                if (useFalloff)
+                {
+                    noiseMap[x,y] = Mathf.Clamp01(noiseMap[x, y] - falloffMap [x, y]);
+                }
+
                 float currentHeight = noiseMap [x, y];
                 for (int i = 0; i < regions.Length; i++)
                 {
@@ -54,7 +74,14 @@ public class MapGenerator : MonoBehaviour
         {
             display.DrawTexture (TextureGenerator.TextureFromColourMap(colourMap, mapWidth, mapHeight));
         }
-        //display.DrawNoiseMap (noiseMap);
+        else if (drawMode == DrawMode.Mesh)
+        {
+            display.DrawMesh(MeshGenerator.GenerateTerrainMesh(noiseMap, meshHeightMultiplier, meshHeightCurve), TextureGenerator.TextureFromColourMap(colourMap, mapWidth, mapHeight));
+        }
+        else if (drawMode == DrawMode.FalloffMap)
+        {
+            display.DrawTexture(TextureGenerator.TextureFromHeightMap(FalloffGenerator.GenerateFalloffMap(mapWidth, mapHeight)));
+        }
     }
 
     void OnValidate()
@@ -75,6 +102,8 @@ public class MapGenerator : MonoBehaviour
         {
             octaves = 0;
         }
+
+        falloffMap = FalloffGenerator.GenerateFalloffMap (mapWidth, mapHeight);
     }
 }
 
