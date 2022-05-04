@@ -34,11 +34,17 @@ public class MapGenerator : MonoBehaviour
     {
         falloffMap = FalloffGenerator.GenerateFalloffMap (mapWidth, mapHeight);
 
+        int seed = (Random.Range(0, 100000));
+        
         GenerateMap();
     }
 
     public void GenerateMap() 
     {
+
+        
+        Debug.Log(seed);
+
         float[,] noiseMap = Noise.GenerateNoiseMap (mapWidth, mapHeight, seed, scale, octaves, persistance, lacunarity, offset);
 
         Color[] colourMap = new Color[mapWidth * mapHeight];
