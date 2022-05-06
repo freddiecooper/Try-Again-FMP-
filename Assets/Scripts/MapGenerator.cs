@@ -28,22 +28,24 @@ public class MapGenerator : MonoBehaviour
 
     public TerrainType[] regions;
 
+    public ObjectGenerator OBJ;
+    //public RockGenerator RG;
+    public meshCollider MC;
+
     float[,] falloffMap;
 
-    void Awake()
+    void Start()
     {
         falloffMap = FalloffGenerator.GenerateFalloffMap (mapWidth, mapHeight);
-
-        int seed = (Random.Range(0, 100000));
         
         GenerateMap();
+
+        //RG.GenerateRock();
     }
 
     public void GenerateMap() 
     {
-
-        
-        Debug.Log(seed);
+        int seed = (Random.Range(0, 100000));
 
         float[,] noiseMap = Noise.GenerateNoiseMap (mapWidth, mapHeight, seed, scale, octaves, persistance, lacunarity, offset);
 
@@ -88,6 +90,14 @@ public class MapGenerator : MonoBehaviour
         {
             display.DrawTexture(TextureGenerator.TextureFromHeightMap(FalloffGenerator.GenerateFalloffMap(mapWidth, mapHeight)));
         }
+
+        MC.GenerateCollider();
+
+
+        
+        OBJ.Generate();
+
+        
     }
 
     void OnValidate()

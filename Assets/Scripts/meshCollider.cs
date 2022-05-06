@@ -8,6 +8,13 @@ public class meshCollider : MonoBehaviour
     
     void Start()
     {
+        //mesh.AddComponent<MeshCollider>();
+    }
+
+    public void GenerateCollider()
+    {
         mesh.AddComponent<MeshCollider>();
     }
+
+
 }
