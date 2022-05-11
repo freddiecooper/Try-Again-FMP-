@@ -13,6 +13,7 @@ public class meshCollider : MonoBehaviour
 
     public void GenerateCollider()
     {
+        DestroyImmediate(GetComponent<MeshCollider>());
         mesh.AddComponent<MeshCollider>();
     }
 

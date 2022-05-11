@@ -92,12 +92,8 @@ public class MapGenerator : MonoBehaviour
         }
 
         MC.GenerateCollider();
-
-
         
         OBJ.Generate();
-
-        
     }
 
     void OnValidate()

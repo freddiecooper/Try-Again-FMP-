@@ -29,6 +29,13 @@ public class PlayerController : MonoBehaviour
 
     Vector2 currentMouseDelta = Vector2.zero;
     Vector2 currentMouseDeltaVelocity = Vector2.zero;
+    Vector3 Direction;
+
+    public int objectDamage = 20;
+
+    public Transform Target;
+
+    public float Range;
 
     void Start()
     {
@@ -45,6 +52,7 @@ public class PlayerController : MonoBehaviour
     {
         UpdateMouseLook();
         UpdateMovement();
+        //yep();
     }
     
     void UpdateMouseLook()
@@ -104,5 +112,34 @@ public class PlayerController : MonoBehaviour
 
         controller.slopeLimit = 45.0f;
         isJumping = false;
+    }
+
+    /*void OnTriggerEnter2D(Collider hitInfo)
+    {
+        objectDamage object = hitInfo.GetComponent<objectDamage>();
+        if(object != null)
+        {
+            object.TakeDamage(objectDamage);
+            Destroy(gameObject);
+        }
+        Destroy(gameObject);
+    }*/
+
+    public void yep()
+    {
+
+        if (Physics.Raycast (transform.position,transform.TransformDirection (Vector3.forward), out RaycastHit hitinfo, 20f))
+        {
+            Debug.Log("hit");
+        }
+        else
+        {
+            Debug.Log("no hit");
+        }
+        /*Vector3 targetPos = Target.position;
+
+        Direction = targetPos - (Vector3)transform.position;
+        
+        RaycastHit raycastHit = Physics.Raycast(transform.position, Direction, Range);*/
     }
 }
