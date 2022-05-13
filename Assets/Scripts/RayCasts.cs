@@ -7,6 +7,10 @@ public class RayCasts : MonoBehaviour
 
     public bool hit;
     public objectDamage _obj;
+    public int Damage = 20;
+    
+
+    bool treeEnter;
 
     void Start()
     {
@@ -16,24 +20,24 @@ public class RayCasts : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Physics.Raycast (transform.position,transform.TransformDirection (Vector3.forward), out RaycastHit hitinfo, 20f))
+        
+    }
+
+    void OnTriggerStay(Collider hitInfo)
+    {
+        objectDamage tree = hitInfo.GetComponent<objectDamage>();
+        if(tree != null)
         {
-            hit = true;
+            treeEnter = true;
         }
         else
         {
-            hit = false;
+            treeEnter = false;
         }
 
-        
-        if (hit == true && Input.GetButton("Fire1"))
+        if (treeEnter == true && Input.GetButtonDown("Fire1"))
         {
-            _obj.TakeDamage();
-            //_obj.GetComponent<objectDamage>().TakeDamage();
-            //objectDamage.TakeDamage(Damage);
-            
+            tree.TakeDamage(Damage);
         }
-
-        //Debug.Log(hit);
     }
 }

@@ -24,13 +24,14 @@ public class objectDamage : MonoBehaviour
         //TakeDamage();
     }
 
-    public void TakeDamage ()
+    public void TakeDamage (int Damage)
     {
         health -= Damage;
+        Debug.Log(health);
 
         if (health <= 0)
         {
-            DestroyImmediate(gameObject);
+            Destroy(gameObject);
         }
     }
 }
