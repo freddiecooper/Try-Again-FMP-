@@ -5,7 +5,7 @@ using UnityEngine;
 public class MapGenerator : MonoBehaviour
 {
 
-    public enum DrawMode {NoiseMap, ColourMap, Mesh, FalloffMap};
+    public enum DrawMode {Mesh/*, NoiseMap, ColourMap,  FalloffMap*/};
     public DrawMode drawMode;
 
     public int mapWidth;
@@ -39,8 +39,6 @@ public class MapGenerator : MonoBehaviour
         falloffMap = FalloffGenerator.GenerateFalloffMap (mapWidth, mapHeight);
         
         GenerateMap();
-
-        //RG.GenerateRock();
     }
 
     public void GenerateMap() 
@@ -74,22 +72,24 @@ public class MapGenerator : MonoBehaviour
         }
 
         MapDisplay display = FindObjectOfType<MapDisplay> ();
-        if (drawMode == DrawMode.NoiseMap)
+        
+        if (drawMode == DrawMode.Mesh)
+        {
+            display.DrawMesh(MeshGenerator.GenerateTerrainMesh(noiseMap, meshHeightMultiplier, meshHeightCurve), TextureGenerator.TextureFromColourMap(colourMap, mapWidth, mapHeight));
+        }
+        /*else if (drawMode == DrawMode.NoiseMap)
         {
             display.DrawTexture (TextureGenerator.TextureFromHeightMap(noiseMap));
         }
         else if (drawMode == DrawMode.ColourMap)
         {
             display.DrawTexture (TextureGenerator.TextureFromColourMap(colourMap, mapWidth, mapHeight));
-        }
-        else if (drawMode == DrawMode.Mesh)
-        {
-            display.DrawMesh(MeshGenerator.GenerateTerrainMesh(noiseMap, meshHeightMultiplier, meshHeightCurve), TextureGenerator.TextureFromColourMap(colourMap, mapWidth, mapHeight));
-        }
-        else if (drawMode == DrawMode.FalloffMap)
+        }*/
+        
+        /*else if (drawMode == DrawMode.FalloffMap)
         {
             display.DrawTexture(TextureGenerator.TextureFromHeightMap(FalloffGenerator.GenerateFalloffMap(mapWidth, mapHeight)));
-        }
+        }*/
 
         MC.GenerateCollider();
         

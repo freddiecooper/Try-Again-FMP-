@@ -31,6 +31,10 @@ public class PlayerController : MonoBehaviour
     Vector2 currentMouseDeltaVelocity = Vector2.zero;
     Vector3 Direction;
 
+    public int Rocks;
+
+    public Collider HitBox;
+
     public int objectDamage = 20;
 
     public Transform Target;
@@ -40,6 +44,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        //anim = GetComponent<Animator>();
         if(lockcursor)
         {
             Cursor.lockState = CursorLockMode.Locked;
@@ -114,16 +119,13 @@ public class PlayerController : MonoBehaviour
         isJumping = false;
     }
 
-    /*void OnTriggerEnter2D(Collider hitInfo)
+    void OnTriggerEnter(Collider other)
     {
-        objectDamage object = hitInfo.GetComponent<objectDamage>();
-        if(object != null)
-        {
-            object.TakeDamage(objectDamage);
-            Destroy(gameObject);
-        }
-        Destroy(gameObject);
-    }*/
+        //if (other.tag = ("Rock"))
+        //{
+        //    Rocks ++;
+        //}
+    }
 
     public void yep()
     {
@@ -136,10 +138,23 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("no hit");
         }
-        /*Vector3 targetPos = Target.position;
+    }
 
-        Direction = targetPos - (Vector3)transform.position;
-        
-        RaycastHit raycastHit = Physics.Raycast(transform.position, Direction, Range);*/
+    public bool hit;
+    public int Damage = 20;
+    public GameObject objects;
+
+    void OnTriggerStay(Collider hitInfo)
+    {
+        if(hitInfo=HitBox)
+        {
+            Debug.Log("YES");
+           objectDamage tree = hitInfo.GetComponent<objectDamage>();
+            if(tree != null && Input.GetButton("Fire1"))
+            {
+                tree.TakeDamage(Damage);
+            }   
+        }
+           
     }
 }

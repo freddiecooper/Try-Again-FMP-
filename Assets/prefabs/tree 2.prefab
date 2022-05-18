@@ -1158,6 +1158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   Damage: 20
+  objects: {fileID: 7197869963816185863, guid: 188aa8ae178b33c4f8122d6bd0a24dac, type: 3}
 --- !u!54 &2176608114400250079
 Rigidbody:
   m_ObjectHideFlags: 0
