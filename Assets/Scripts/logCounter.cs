@@ -21,8 +21,7 @@ public class logCounter : MonoBehaviour
         if(other.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
-            Debug.Log("log");
+            //Debug.Log("log");
         }
-        Debug.Log("log");
     }
 }

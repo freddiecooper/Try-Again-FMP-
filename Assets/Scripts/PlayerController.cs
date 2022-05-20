@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
 
     private bool isJumping;
 
+    private Animator anim;
+
     [SerializeField] private AnimationCurve jumpFallOff;
     [SerializeField] private float jumpMultiplier;
     [SerializeField] private KeyCode Jump;
@@ -57,7 +59,6 @@ public class PlayerController : MonoBehaviour
     {
         UpdateMouseLook();
         UpdateMovement();
-        //yep();
     }
     
     void UpdateMouseLook()
@@ -121,22 +122,10 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        //if (other.tag = ("Rock"))
-        //{
-        //    Rocks ++;
-        //}
-    }
-
-    public void yep()
-    {
-
-        if (Physics.Raycast (transform.position,transform.TransformDirection (Vector3.forward), out RaycastHit hitinfo, 20f))
+        if (other.gameObject.CompareTag("Rock"))
         {
-            Debug.Log("hit");
-        }
-        else
-        {
-            Debug.Log("no hit");
+            Rocks ++;
+            Debug.Log(Rocks);
         }
     }
 
@@ -148,8 +137,8 @@ public class PlayerController : MonoBehaviour
     {
         if(hitInfo=HitBox)
         {
-            Debug.Log("YES");
-           objectDamage tree = hitInfo.GetComponent<objectDamage>();
+            //Debug.Log("YES");
+            objectDamage tree = hitInfo.GetComponent<objectDamage>();
             if(tree != null && Input.GetButton("Fire1"))
             {
                 tree.TakeDamage(Damage);

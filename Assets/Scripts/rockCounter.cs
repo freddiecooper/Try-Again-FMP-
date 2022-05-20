@@ -21,7 +21,6 @@ public class rockCounter : MonoBehaviour
         if(other.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
-            Debug.Log("Rock");
         }
     }
 }
