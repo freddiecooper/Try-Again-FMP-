@@ -6,6 +6,9 @@ using UnityEditor;
 public class ObjectGenerator : MonoBehaviour
 {
 
+    public GameObject treePrefab;
+    public GameObject rockPrefab;
+
     [SerializeField] GameObject prefab;
     [SerializeField] GameObject prefabR;
 
@@ -57,7 +60,7 @@ public class ObjectGenerator : MonoBehaviour
             if (hit.point.y < minHeight)
                 continue;
 
-            GameObject instantiatedPrefab = (GameObject)PrefabUtility.InstantiatePrefab(this.prefab, transform);
+            var instantiatedPrefab = (GameObject)PrefabUtility.InstantiatePrefab(this.prefab, transform);
             instantiatedPrefab.transform.position = hit.point;
         }
 

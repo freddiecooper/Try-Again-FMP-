@@ -29,7 +29,6 @@ public class MapGenerator : MonoBehaviour
     public TerrainType[] regions;
 
     public ObjectGenerator OBJ;
-    //public RockGenerator RG;
     public meshCollider MC;
 
     float[,] falloffMap;
