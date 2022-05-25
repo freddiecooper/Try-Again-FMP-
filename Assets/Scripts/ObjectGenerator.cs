@@ -5,12 +5,8 @@ using UnityEditor;
 
 public class ObjectGenerator : MonoBehaviour
 {
-
     public GameObject treePrefab;
     public GameObject rockPrefab;
-
-    [SerializeField] GameObject prefab;
-    [SerializeField] GameObject prefabR;
 
     [Header("Raycast Settings")]
     [SerializeField] int density;
@@ -37,32 +33,12 @@ public class ObjectGenerator : MonoBehaviour
 
     void Start()
     {
-        //Generate();
-    }
 
-#if UNITY_EDITOR
+    }
 
     public void Generate()
     {
         Clear();
-
-        
-
-        for (int i = 0; i < density; i++)
-        {
-            float sampleX = Random.Range(xRange.x, xRange.y);
-            float sampleY = Random.Range(zRange.x, zRange.y);
-            Vector3 rayStart = new Vector3(sampleX, maxHeight, sampleY);
-
-            if (!Physics.Raycast(rayStart, Vector3.down, out RaycastHit hit, Mathf.Infinity))
-                continue;
-
-            if (hit.point.y < minHeight)
-                continue;
-
-            var instantiatedPrefab = (GameObject)PrefabUtility.InstantiatePrefab(this.prefab, transform);
-            instantiatedPrefab.transform.position = hit.point;
-        }
 
         for (int i = 0; i < densityR; i++)
         {
@@ -76,10 +52,34 @@ public class ObjectGenerator : MonoBehaviour
             if (hit.point.y < minHeightR)
                 continue;
 
-            GameObject instantiatedPrefab = (GameObject)PrefabUtility.InstantiatePrefab(this.prefabR, transform);
-            instantiatedPrefab.transform.position = hit.point;
+            Quaternion spawnRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+
+            GameObject clone = Instantiate(rockPrefab, hit.point, spawnRotation);
+
+            clone.transform.parent = gameObject.transform;
         }
-    }
+    
+
+        for (int i = 0; i < density; i++)
+        {
+            float sampleX = Random.Range(xRange.x, xRange.y);
+            float sampleY = Random.Range(zRange.x, zRange.y);
+            Vector3 rayStart = new Vector3(sampleX, maxHeight, sampleY);
+
+            if (!Physics.Raycast(rayStart, Vector3.down, out RaycastHit hit, Mathf.Infinity))
+                continue;
+
+            if (hit.point.y < minHeight)
+                continue;
+
+            Quaternion spawnRotation = Quaternion.FromToRotation(Vector3.up, Vector3.up);
+
+            GameObject clone = Instantiate(treePrefab, hit.point, spawnRotation);
+
+            clone.transform.parent = gameObject.transform;
+        }
+
+    }  
 
     public void Clear()
     {
@@ -88,6 +88,5 @@ public class ObjectGenerator : MonoBehaviour
             DestroyImmediate(transform.GetChild(0).gameObject);
         }
     }
-#endif
 }
 
