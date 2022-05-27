@@ -41,9 +41,9 @@ GameObject:
   - component: {fileID: 6153369710800817324}
   - component: {fileID: 7118769012193968905}
   - component: {fileID: 4984928412267296707}
-  - component: {fileID: -789687030805338463}
   - component: {fileID: 3337724178660742046}
   - component: {fileID: -137469167989082749}
+  - component: {fileID: 1659838199290271754}
   m_Layer: 0
   m_Name: rock 1
   m_TagString: tree
@@ -116,22 +116,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-789687030805338463
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6786636063845520918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76ef9bbe0c8ed684d80862866da7963f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  Damage: 20
-  objectPoint: {fileID: 7017146667161922988}
-  objects: {fileID: 7327906477281344563, guid: 311baf6acf6d0d34a8aea99438abcc87, type: 3}
 --- !u!135 &3337724178660742046
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -161,3 +145,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &1659838199290271754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6786636063845520918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46a19cff2ae18a841beb319d720efa22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  Damage: 20
+  objectPointR: {fileID: 7017146667161922988}
+  objectsR: {fileID: 7327906477281344563, guid: 311baf6acf6d0d34a8aea99438abcc87, type: 3}
